@@ -1,0 +1,32 @@
+{
+  "pilot_id": "",
+  "organization": "",
+  "environment": "",
+  "runtime_version": "",
+  "validation_kit_version": "",
+  "deployment_date": "",
+  "evaluation_date": "",
+  "status": "PASS",
+  "deployment": {
+    "completed": true,
+    "baseline_validation": true,
+    "failure_injection": true,
+    "recovery_validation": true,
+    "evidence_export": true,
+    "independent_verification": true
+  },
+  "artifacts": {
+    "deployment_summary": "",
+    "validation_report": "",
+    "evidence_bundle": "",
+    "verification_report": "",
+    "final_report": ""
+  },
+  "summary": {
+    "objectives_completed": true,
+    "issues_found": 0,
+    "recommendations": 0
+  },
+  "generated_at": "",
+  "notes": ""
+}
