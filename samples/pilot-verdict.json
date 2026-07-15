@@ -1,0 +1,28 @@
+{
+  "pilot_id": "",
+  "evaluation_date": "",
+  "verdict": "PASS",
+  "confidence": "HIGH",
+  "verification": {
+    "deployment_verified": true,
+    "evidence_verified": true,
+    "independent_validation": true,
+    "integrity_verified": true
+  },
+  "findings": {
+    "critical_issues": 0,
+    "major_issues": 0,
+    "minor_issues": 0
+  },
+  "decision": {
+    "accepted": true,
+    "conditional": false,
+    "rejected": false
+  },
+  "review": {
+    "reviewer": "",
+    "organization": "",
+    "comments": ""
+  },
+  "generated_at": ""
+}
