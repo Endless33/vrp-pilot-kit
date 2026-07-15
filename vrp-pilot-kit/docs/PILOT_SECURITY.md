@@ -1,6 +1,6 @@
-# VRP Pilot Security
+VRP Pilot Security
 
-## Purpose
+Purpose
 
 This document defines the security boundary, operational assumptions, and minimum controls required for a VRP pilot deployment.
 
@@ -25,7 +25,7 @@ The security model is based on a strict separation between:
 
 ---
 
-## 1. Security Objectives
+1. Security Objectives
 
 A VRP pilot deployment must preserve the following objectives:
 
@@ -45,11 +45,11 @@ Every externally supplied operation must be treated as untrusted until it has pa
 
 ---
 
-## 2. Security Boundary
+2. Security Boundary
 
 The pilot security boundary consists of four logical zones.
 
-### 2.1 Participant Environment
+2.1 Participant Environment
 
 The participant environment may include:
 
@@ -71,7 +71,7 @@ The participant must assume that access to the pilot interface does not provide 
 
 ---
 
-### 2.2 Pilot Integration Boundary
+2.2 Pilot Integration Boundary
 
 The pilot integration boundary provides the approved interface between the participant environment and the VRP pilot system.
 
@@ -100,7 +100,7 @@ All inputs crossing this boundary must be validated.
 
 ---
 
-### 2.3 Protected Runtime Boundary
+2.3 Protected Runtime Boundary
 
 The protected runtime is outside the participant trust domain.
 
@@ -126,7 +126,7 @@ The exact deployment model is defined in the pilot agreement and deployment plan
 
 ---
 
-### 2.4 Evidence and Validation Boundary
+2.4 Evidence and Validation Boundary
 
 The evidence boundary exposes only the information required to determine whether the documented pilot conditions were satisfied.
 
@@ -160,7 +160,7 @@ Evidence must not contain:
 
 ---
 
-## 3. Trust Model
+3. Trust Model
 
 The pilot uses a limited-trust model.
 
@@ -197,7 +197,7 @@ No single unverified input should be sufficient to authorize a protected operati
 
 ---
 
-## 4. Fail-Closed Behavior
+4. Fail-Closed Behavior
 
 The pilot must fail closed when any required security condition cannot be established.
 
@@ -233,7 +233,7 @@ Failure to authorize an operation must not silently downgrade into an insecure m
 
 ---
 
-## 5. Authentication and Authorization
+5. Authentication and Authorization
 
 Access to pilot operations must be restricted to explicitly authorized identities.
 
@@ -273,7 +273,7 @@ Administrative operations must be separated from normal test execution.
 
 ---
 
-## 6. Transport Security
+6. Transport Security
 
 Communication crossing the pilot boundary must use an approved authenticated transport.
 
@@ -303,7 +303,7 @@ Temporary development exceptions must be clearly marked and must not be used for
 
 ---
 
-## 7. Replay and Duplicate Protection
+7. Replay and Duplicate Protection
 
 Pilot control operations and evidence submissions must be protected against replay where applicable.
 
@@ -329,7 +329,7 @@ The validator must distinguish between:
 
 ---
 
-## 8. Configuration Security
+8. Configuration Security
 
 Pilot configuration is part of the trusted deployment state.
 
@@ -361,7 +361,7 @@ Unrecorded configuration drift may invalidate the affected test result.
 
 ---
 
-## 9. Host Security Requirements
+9. Host Security Requirements
 
 Hosts participating in the pilot should meet the following minimum requirements:
 
@@ -389,7 +389,7 @@ The protected runtime must not be installed on an untrusted host unless the appr
 
 ---
 
-## 10. Network Isolation
+10. Network Isolation
 
 The pilot should be isolated from unrelated production systems whenever practical.
 
@@ -420,7 +420,7 @@ Failure injection must not affect:
 
 ---
 
-## 11. Test Data Protection
+11. Test Data Protection
 
 The pilot should use synthetic or non-sensitive test data whenever possible.
 
@@ -446,7 +446,7 @@ The final report should describe what categories of data were processed without 
 
 ---
 
-## 12. Evidence Integrity
+12. Evidence Integrity
 
 Every final evidence package should include enough information to verify that the package has not been modified after generation.
 
@@ -478,7 +478,7 @@ A report must not claim a verified result when the associated evidence cannot be
 
 ---
 
-## 13. Evidence Redaction
+13. Evidence Redaction
 
 Evidence export must follow data-minimization principles.
 
@@ -500,228 +500,352 @@ Redaction must not alter the meaning of the final verdict.
 
 When a value is redacted, the report should indicate the category of removed information where useful, for example:
 
-```text
 participant_internal_address=<redacted>
 
 Redacted evidence may be accompanied by hashes of the original protected artifacts when required for auditability.
+
+---
+
 14. Logging and Audit
+
 Security-relevant pilot operations must produce an audit record where supported.
+
 Audit events should include:
-deployment initialization;
-configuration validation;
-authorization success or rejection;
-test execution start;
-test execution completion;
-evidence collection;
-evidence validation;
-integrity failures;
-operator intervention;
-configuration changes;
-pilot suspension;
-final acceptance.
+
+- deployment initialization;
+- configuration validation;
+- authorization success or rejection;
+- test execution start;
+- test execution completion;
+- evidence collection;
+- evidence validation;
+- integrity failures;
+- operator intervention;
+- configuration changes;
+- pilot suspension;
+- final acceptance.
+
 Logs should use a consistent time source.
+
 Logs must not contain plaintext secrets.
+
 Access to logs should be restricted to authorized pilot personnel.
+
 Audit records required for the final report must be retained until pilot acceptance or formal termination.
+
+---
+
 15. Runtime and Version Identification
+
 All pilot results must be associated with identifiable software versions.
+
 The deployment record should include:
-pilot kit version;
-validator version;
-report tool version;
-public integration contract version;
-protected runtime release identifier, when disclosure is permitted;
-configuration version;
-operating system version;
-relevant dependency versions.
+
+- pilot kit version;
+- validator version;
+- report tool version;
+- public integration contract version;
+- protected runtime release identifier, when disclosure is permitted;
+- configuration version;
+- operating system version;
+- relevant dependency versions.
+
 A result produced by an unknown or modified runtime must not be treated as an accepted result.
+
 Upgrading any major pilot component during evaluation must be documented.
+
 Tests executed before and after an upgrade should be treated as separate validation groups unless the test plan explicitly states otherwise.
+
+---
+
 16. Dependency and Supply-Chain Controls
+
 Pilot tools should use pinned or reproducible dependencies where practical.
+
 Before deployment:
-verify repository origin;
-verify release checksums;
-review dependency changes;
-avoid unofficial binaries;
-avoid executing unreviewed scripts with administrative privileges;
-record the exact commit or release used.
+
+- verify repository origin;
+- verify release checksums;
+- review dependency changes;
+- avoid unofficial binaries;
+- avoid executing unreviewed scripts with administrative privileges;
+- record the exact commit or release used.
+
 Third-party tools used for:
-traffic generation;
-packet capture;
-failure injection;
-monitoring;
-evidence transfer;
-archive creation;
+
+- traffic generation;
+- packet capture;
+- failure injection;
+- monitoring;
+- evidence transfer;
+- archive creation;
+
 must be listed in the deployment summary.
+
 The presence of a third-party tool does not make its output trusted automatically.
+
+---
+
 17. Script Execution Security
+
 Scripts supplied by the pilot kit must be reviewed before execution.
+
 Scripts must not be assumed safe solely because they are stored in the repository.
+
 Before running a script:
-review its contents;
-confirm the expected working directory;
-confirm required privileges;
-verify file paths;
-verify destination paths;
-ensure secrets are not printed;
-confirm that destructive operations are not performed.
+
+- review its contents;
+- confirm the expected working directory;
+- confirm required privileges;
+- verify file paths;
+- verify destination paths;
+- ensure secrets are not printed;
+- confirm that destructive operations are not performed.
+
 Pilot scripts should use the least privilege necessary.
+
 Scripts requiring elevated privileges must state why those privileges are required.
+
 Collected artifacts should be written only to the designated evidence directory.
+
+---
+
 18. Security Incident Handling
+
 A security incident includes any event that may affect:
-pilot credential confidentiality;
-runtime integrity;
-evidence integrity;
-environment authorization;
-participant data;
-protected implementation confidentiality;
-validity of test results.
+
+- pilot credential confidentiality;
+- runtime integrity;
+- evidence integrity;
+- environment authorization;
+- participant data;
+- protected implementation confidentiality;
+- validity of test results.
+
 Examples include:
-leaked credential;
-unauthorized repository access;
-unexpected runtime modification;
-corrupted evidence package;
-unapproved configuration change;
-unknown administrative login;
-malware detection;
-unauthorized network exposure;
-suspected reverse-engineering attempt;
-participant host compromise.
+
+- leaked credential;
+- unauthorized repository access;
+- unexpected runtime modification;
+- corrupted evidence package;
+- unapproved configuration change;
+- unknown administrative login;
+- malware detection;
+- unauthorized network exposure;
+- suspected reverse-engineering attempt;
+- participant host compromise.
+
 When an incident is detected:
-stop affected pilot operations;
-preserve relevant logs and evidence;
-revoke or rotate affected credentials;
-isolate affected systems;
-record the incident timestamp;
-identify affected executions;
-notify the designated pilot contact;
-determine whether previous results remain valid;
-resume only after explicit approval.
+
+1. stop affected pilot operations;
+2. preserve relevant logs and evidence;
+3. revoke or rotate affected credentials;
+4. isolate affected systems;
+5. record the incident timestamp;
+6. identify affected executions;
+7. notify the designated pilot contact;
+8. determine whether previous results remain valid;
+9. resume only after explicit approval.
+
 An incident must not be hidden to preserve a positive pilot verdict.
+
+---
+
 19. Vulnerability Reporting
+
 Potential security vulnerabilities should be reported privately.
+
 Reports should include:
-affected component;
-observed behavior;
-reproduction conditions;
-security impact;
-environment details;
-relevant logs;
-whether the issue is still reproducible.
+
+- affected component;
+- observed behavior;
+- reproduction conditions;
+- security impact;
+- environment details;
+- relevant logs;
+- whether the issue is still reproducible.
+
 Do not publish:
-active credentials;
-exploit details affecting an active pilot;
-private runtime artifacts;
-participant-sensitive information;
-unredacted logs;
-protected implementation details.
+
+- active credentials;
+- exploit details affecting an active pilot;
+- private runtime artifacts;
+- participant-sensitive information;
+- unredacted logs;
+- protected implementation details.
+
 A suspected vulnerability must not automatically be described as a confirmed vulnerability until it has been reproduced and evaluated.
+
+---
+
 20. Prohibited Activities
+
 The following activities are prohibited unless explicitly authorized in writing:
-reverse engineering the protected runtime;
-decompilation;
-binary modification;
-credential sharing;
-license bypass;
-unauthorized fuzzing of protected endpoints;
-denial-of-service testing outside the approved test plan;
-scanning unrelated infrastructure;
-extracting protected runtime memory;
-bypassing evidence redaction;
-accessing another participant’s environment;
-publishing non-public pilot artifacts;
-using pilot components outside the approved scope;
-attempting to reconstruct protected algorithms from observed outputs.
+
+- reverse engineering the protected runtime;
+- decompilation;
+- binary modification;
+- credential sharing;
+- license bypass;
+- unauthorized fuzzing of protected endpoints;
+- denial-of-service testing outside the approved test plan;
+- scanning unrelated infrastructure;
+- extracting protected runtime memory;
+- bypassing evidence redaction;
+- accessing another participant’s environment;
+- publishing non-public pilot artifacts;
+- using pilot components outside the approved scope;
+- attempting to reconstruct protected algorithms from observed outputs.
+
 Security testing must remain within the documented pilot scope.
+
+---
+
 21. Public Disclosure
+
 No pilot result should be published before confirming:
-the result is final;
-the associated evidence is valid;
-participant approval requirements have been met;
-confidential information has been removed;
-protected runtime details are not disclosed;
-the wording does not exceed what the evidence demonstrates.
+
+- the result is final;
+- the associated evidence is valid;
+- participant approval requirements have been met;
+- confidential information has been removed;
+- protected runtime details are not disclosed;
+- the wording does not exceed what the evidence demonstrates.
+
 Permitted public statements should be limited to validated outcomes such as:
+
 PILOT_EXECUTION_COMPLETED
+
 CONTINUITY_REQUIREMENTS_VERIFIED
+
 EVIDENCE_PACKAGE_VALIDATED
+
 FINAL_ACCEPTANCE_PASSED
+
 A pilot must not publicly claim:
-absolute security;
-immunity from all attacks;
-universal production readiness;
-compliance certification that was not independently granted;
-validation beyond the executed test scope.
+
+- absolute security;
+- immunity from all attacks;
+- universal production readiness;
+- compliance certification that was not independently granted;
+- validation beyond the executed test scope.
+
+---
+
 22. Security Acceptance Criteria
+
 The pilot security review may be accepted when:
-deployment identities are documented;
-required authentication is enabled;
-unauthorized operations are rejected;
-transport security is enabled;
-certificate verification is not disabled;
-secrets are stored outside the repository;
-test data handling is documented;
-evidence export is redacted;
-evidence integrity can be verified;
-runtime and tool versions are recorded;
-security-relevant configuration changes are auditable;
-no unresolved critical security incident remains;
-prohibited access paths are not present;
-the final report accurately describes security limitations.
+
+- deployment identities are documented;
+- required authentication is enabled;
+- unauthorized operations are rejected;
+- transport security is enabled;
+- certificate verification is not disabled;
+- secrets are stored outside the repository;
+- test data handling is documented;
+- evidence export is redacted;
+- evidence integrity can be verified;
+- runtime and tool versions are recorded;
+- security-relevant configuration changes are auditable;
+- no unresolved critical security incident remains;
+- prohibited access paths are not present;
+- the final report accurately describes security limitations.
+
 Example result:
+
 SECURITY_REVIEW=PASSED
+
 Possible non-final results:
+
 SECURITY_REVIEW=PASSED_WITH_LIMITATIONS
+
 SECURITY_REVIEW=REQUIRES_REMEDIATION
+
 SECURITY_REVIEW=REJECTED
+
+---
+
 23. Security Limitations
+
 A successful pilot security review demonstrates only that the documented controls were present during the evaluated deployment and test period.
+
 It does not prove:
-absence of all vulnerabilities;
-security of unrelated participant systems;
-security of future versions;
-security under untested deployment models;
-regulatory compliance;
-suitability for every production environment;
-resistance to every possible adversary.
+
+- absence of all vulnerabilities;
+- security of unrelated participant systems;
+- security of future versions;
+- security under untested deployment models;
+- regulatory compliance;
+- suitability for every production environment;
+- resistance to every possible adversary.
+
 Security conclusions must remain bounded by:
-the evaluated version;
-the evaluated configuration;
-the evaluated environment;
-the executed scenarios;
-the available evidence;
-the pilot time window.
+
+- the evaluated version;
+- the evaluated configuration;
+- the evaluated environment;
+- the executed scenarios;
+- the available evidence;
+- the pilot time window.
+
+---
+
 24. Responsibility Matrix
+
 VRP Pilot Operator
+
 Responsible for:
-maintaining the protected runtime boundary;
-defining permitted pilot interfaces;
-protecting runtime credentials and secrets;
-providing approved evidence export behavior;
-investigating protected runtime security incidents;
-confirming runtime identity where applicable.
+
+- maintaining the protected runtime boundary;
+- defining permitted pilot interfaces;
+- protecting runtime credentials and secrets;
+- providing approved evidence export behavior;
+- investigating protected runtime security incidents;
+- confirming runtime identity where applicable.
+
 Pilot Participant
+
 Responsible for:
-securing participant-controlled infrastructure;
-controlling operator access;
-protecting participant credentials;
-using approved test data;
-limiting failure injection to the approved environment;
-preserving collected evidence;
-reporting incidents promptly;
-preventing unauthorized disclosure.
+
+- securing participant-controlled infrastructure;
+- controlling operator access;
+- protecting participant credentials;
+- using approved test data;
+- limiting failure injection to the approved environment;
+- preserving collected evidence;
+- reporting incidents promptly;
+- preventing unauthorized disclosure.
+
 Joint Responsibility
+
 Both parties are responsible for:
-agreeing on deployment scope;
-documenting trust assumptions;
-approving security exceptions;
-validating the final evidence package;
-documenting unresolved limitations;
-preventing claims beyond the validated scope.
+
+- agreeing on deployment scope;
+- documenting trust assumptions;
+- approving security exceptions;
+- validating the final evidence package;
+- documenting unresolved limitations;
+- preventing claims beyond the validated scope.
+
+---
+
 25. Final Security Principle
+
 The VRP pilot security model follows one primary rule:
-Observable behavior may be validated externally, but the protected implementation that produces that behavior remains outside the participant trust boundary.
+
+«Observable behavior may be validated externally, but the protected implementation that produces that behavior remains outside the participant trust boundary.»
+
 The pilot must provide enough visibility to verify results.
-It must not provide enough access to compromise the protected runtime, participant infrastructure, evidence integrity, or intellectual property boundary.
+
+It must not provide enough access to compromise:
+
+- the protected runtime;
+- participant infrastructure;
+- evidence integrity;
+- authorization boundaries;
+- intellectual property protection.
+
+Final security boundary statement:
+
+EXTERNAL_VALIDATION_ALLOWED
+PROTECTED_IMPLEMENTATION_EXPOSURE=DENIED
