@@ -1,0 +1,28 @@
+Business Source License 1.1
+
+Copyright (c) 2026 Vitalijus Riabovas
+
+Licensed under the Business Source License 1.1 (BSL 1.1).
+
+You may:
+
+- view this repository;
+- study the public engineering materials;
+- perform technical evaluation;
+- use the documentation for interoperability and Pilot preparation.
+
+You may not, without prior written permission:
+
+- redistribute Protected Runtime components;
+- create commercial derivative runtime implementations;
+- remove authorship notices;
+- misrepresent authorship;
+- use proprietary VRP technology outside the rights granted by separate written agreements.
+
+Protected Runtime, proprietary algorithms, runtime mathematics, authority logic, recovery logic, customer-specific deployments and commercial runtime packages are not included in this repository.
+
+See the LICENSE file at:
+
+https://mariadb.com/bsl11/
+
+Engineering continues.
