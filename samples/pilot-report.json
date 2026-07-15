@@ -1,0 +1,53 @@
+{
+  "pilot": {
+    "pilot_id": "",
+    "organization": "",
+    "environment": "",
+    "deployment_date": "",
+    "evaluation_date": ""
+  },
+  "versions": {
+    "runtime": "",
+    "validation_kit": "",
+    "report": "1.0"
+  },
+  "validation": {
+    "deployment_completed": true,
+    "baseline_validation": true,
+    "failure_injection": true,
+    "recovery_validation": true,
+    "evidence_export": true,
+    "independent_verification": true
+  },
+  "evidence": {
+    "deployment_summary": "",
+    "evidence_bundle": "",
+    "verification_report": "",
+    "final_report": ""
+  },
+  "observations": [
+    {
+      "id": "",
+      "severity": "INFO",
+      "description": ""
+    }
+  ],
+  "issues": [
+    {
+      "id": "",
+      "severity": "NONE",
+      "description": "",
+      "resolution": ""
+    }
+  ],
+  "recommendations": [
+    ""
+  ],
+  "final_verdict": {
+    "status": "PASS",
+    "approved": true,
+    "reviewer": "",
+    "approval_date": ""
+  },
+  "generated_at": ""
+}
