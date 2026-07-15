@@ -1,0 +1,20 @@
+VRP Pilot Repository
+Copyright (c) 2026 Vitalijus Riabovas.
+All rights reserved.
+
+This repository contains public documentation, deployment guidance, validation materials, report templates, example artifacts, and integration references for the VRP Pilot Program.
+
+Unless explicitly stated otherwise, the contents of this repository do not include:
+
+- protected VRP runtime implementation;
+- proprietary algorithms;
+- confidential engineering methods;
+- internal authority logic;
+- private runtime state;
+- protected operational procedures.
+
+The materials contained in this repository are intended solely to document the public integration boundary, observable behavior, exported evidence model, and independent validation process associated with the VRP Pilot Program.
+
+Nothing contained in this repository should be interpreted as granting access to protected implementation details or confidential engineering information.
+
+All trademarks, product names, and project names remain the property of their respective owners where applicable.
